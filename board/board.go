@@ -90,7 +90,7 @@ func (b *Board) Candidates(x, y int) []Tile {
 
 func (b *Board) Print() {
 	for i, row := range b.Tiles {
-		for j, _ := range row {
+		for j := range row {
 			fmt.Printf(" %3d", b.Tiles[i][j].Visit)
 		}
 		fmt.Println()
