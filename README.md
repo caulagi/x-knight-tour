@@ -43,3 +43,24 @@ $ ./x-knight-tour 2 3
   26  48  59  27  47  58  28  46  57  29
   73   5  16  80   6  17  81   7  18  82
 ```
+
+## Tests
+
+```
+$ go test -v ./...
+?   	github.com/caulagi/x-knight-tour	[no test files]
+=== RUN   TestNewBoard
+--- PASS: TestNewBoard (0.00s)
+=== RUN   TestHorizontalCandidates
+--- PASS: TestHorizontalCandidates (0.00s)
+=== RUN   TestVerticalCandidates
+--- PASS: TestVerticalCandidates (0.00s)
+=== RUN   TestDiagonalCandidates
+--- PASS: TestDiagonalCandidates (0.00s)
+PASS
+ok  	github.com/caulagi/x-knight-tour/board	0.128s
+```
+
+#### License
+
+This software is licensed under the MIT License. See [LICENSE](LICENSE) for details.
