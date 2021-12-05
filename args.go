@@ -1,21 +1,12 @@
 package main
 
 import (
+	"log"
 	"os"
 	"strconv"
 
 	"github.com/urfave/cli/v2"
 )
-
-func checkHelp(c *cli.Context) bool {
-	found := false
-	for _, name := range cli.HelpFlag.Names() {
-		if c.Bool(name) {
-			found = true
-		}
-	}
-	return found
-}
 
 func userInput() (int, int, int) {
 	var startX, startY, boardSize int
@@ -51,6 +42,10 @@ func userInput() (int, int, int) {
 		},
 	}
 
-	app.Run(os.Args)
+	err := app.Run(os.Args)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	return startX, startY, boardSize
 }
