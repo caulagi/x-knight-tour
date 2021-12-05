@@ -30,7 +30,7 @@ func (b *Board) CurrentCandidates() []Tile {
 	return b.Candidates(b.PositionX, b.PositionY)
 }
 
-func (b *Board) horizontalCandidates(x, y int, potentialMoves []Tile) []Tile {
+func (b *Board) HorizontalCandidates(x, y int, potentialMoves []Tile) []Tile {
 	if x+3 <= len(b.Tiles)-1 {
 		potentialMoves = append(potentialMoves, b.Tiles[x+3][y])
 	}
@@ -40,7 +40,7 @@ func (b *Board) horizontalCandidates(x, y int, potentialMoves []Tile) []Tile {
 	return potentialMoves
 }
 
-func (b *Board) verticalCandidates(x, y int, potentialMoves []Tile) []Tile {
+func (b *Board) VerticalCandidates(x, y int, potentialMoves []Tile) []Tile {
 	if y+3 <= len(b.Tiles)-1 {
 		potentialMoves = append(potentialMoves, b.Tiles[x][y+3])
 	}
@@ -74,8 +74,8 @@ func (b *Board) Candidates(x, y int) []Tile {
 		return potentialMoves
 	}
 
-	potentialMoves = b.horizontalCandidates(x, y, potentialMoves)
-	potentialMoves = b.verticalCandidates(x, y, potentialMoves)
+	potentialMoves = b.HorizontalCandidates(x, y, potentialMoves)
+	potentialMoves = b.VerticalCandidates(x, y, potentialMoves)
 	potentialMoves = b.DiagonalCandidates(x, y, potentialMoves)
 
 	moves := []Tile{}
