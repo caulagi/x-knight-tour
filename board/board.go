@@ -1,6 +1,9 @@
 package board
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 type Tile struct {
 	Visit int
@@ -24,6 +27,34 @@ func NewBoard(size, startX, startY int) Board {
 	}
 	b.Tiles[startX][startY].Visit = 1
 	return b
+}
+
+func (b *Board) Solve(startingX, startingY, boardSize int) {
+	visitCount := 1
+	for {
+		candidates := b.CurrentCandidates()
+		least := math.MaxInt8
+		leastTile := Tile{}
+		for _, candidate := range candidates {
+			nextMoves := b.Candidates(candidate.X, candidate.Y)
+			if len(nextMoves) < least {
+				least = len(nextMoves)
+				leastTile = candidate
+			}
+		}
+		visitCount += 1
+		b.Tiles[leastTile.X][leastTile.Y].Visit = visitCount
+		b.MoveToTile(leastTile)
+
+		if b.PositionX == startingX && b.PositionY == startingY {
+			fmt.Println("Failed to find a path; try again?")
+			break
+		}
+
+		if visitCount == boardSize*boardSize {
+			break
+		}
+	}
 }
 
 func (b *Board) CurrentCandidates() []Tile {
@@ -95,6 +126,10 @@ func (b *Board) Print() {
 		}
 		fmt.Println()
 	}
+}
+
+func (b *Board) GetTiles() [][]Tile {
+	return b.Tiles
 }
 
 func (b *Board) MoveToTile(tile Tile) {
