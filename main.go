@@ -3,27 +3,12 @@ package main
 import (
 	"fmt"
 	"math"
-	"os"
-	"strconv"
 
 	"github.com/caulagi/x-knight-tour/board"
 )
 
-const boardSize = 10
-
-func getInput() (int, int) {
-	var x, y int
-	if len(os.Args) > 1 {
-		x, _ = strconv.Atoi(os.Args[1])
-	}
-	if len(os.Args) > 2 {
-		y, _ = strconv.Atoi(os.Args[2])
-	}
-	return x, y
-}
-
 func main() {
-	startingX, startingY := getInput()
+	startingX, startingY, boardSize := userInput()
 	visitCount := 1
 	b := board.NewBoard(boardSize, startingX, startingY)
 
@@ -43,7 +28,7 @@ func main() {
 		b.MoveToTile(leastTile)
 
 		if b.PositionX == startingX && b.PositionY == startingY {
-			fmt.Println("Failed to find a path - try again!")
+			fmt.Println("Failed to find a path; try again?")
 			break
 		}
 
