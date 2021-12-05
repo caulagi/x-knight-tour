@@ -32,11 +32,10 @@ func NewBoard(size, startX, startY int) Board {
 func (b *Board) Solve(startingX, startingY, boardSize int) {
 	visitCount := 1
 	for {
-		candidates := b.CurrentCandidates()
 		least := math.MaxInt8
 		leastTile := Tile{}
-		for _, candidate := range candidates {
-			nextMoves := b.Candidates(candidate.X, candidate.Y)
+		for _, candidate := range b.currentCandidates() {
+			nextMoves := b.candidates(candidate.X, candidate.Y)
 			if len(nextMoves) < least {
 				least = len(nextMoves)
 				leastTile = candidate
@@ -44,7 +43,7 @@ func (b *Board) Solve(startingX, startingY, boardSize int) {
 		}
 		visitCount += 1
 		b.Tiles[leastTile.X][leastTile.Y].Visit = visitCount
-		b.MoveToTile(leastTile)
+		b.moveToTile(leastTile)
 
 		if b.PositionX == startingX && b.PositionY == startingY {
 			fmt.Println("Failed to find a path; try again?")
@@ -57,8 +56,8 @@ func (b *Board) Solve(startingX, startingY, boardSize int) {
 	}
 }
 
-func (b *Board) CurrentCandidates() []Tile {
-	return b.Candidates(b.PositionX, b.PositionY)
+func (b *Board) currentCandidates() []Tile {
+	return b.candidates(b.PositionX, b.PositionY)
 }
 
 func (b *Board) HorizontalCandidates(x, y int, potentialMoves []Tile) []Tile {
@@ -97,7 +96,7 @@ func (b *Board) DiagonalCandidates(x, y int, potentialMoves []Tile) []Tile {
 	return potentialMoves
 }
 
-func (b *Board) Candidates(x, y int) []Tile {
+func (b *Board) candidates(x, y int) []Tile {
 
 	potentialMoves := []Tile{}
 
@@ -132,7 +131,7 @@ func (b *Board) GetTiles() [][]Tile {
 	return b.Tiles
 }
 
-func (b *Board) MoveToTile(tile Tile) {
+func (b *Board) moveToTile(tile Tile) {
 	tile.Visit = 1
 	b.PositionX = tile.X
 	b.PositionY = tile.Y
