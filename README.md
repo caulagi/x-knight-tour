@@ -59,8 +59,10 @@ $ go test -v ./...
 --- PASS: TestVerticalCandidates (0.00s)
 === RUN   TestDiagonalCandidates
 --- PASS: TestDiagonalCandidates (0.00s)
+=== RUN   TestSolve
+--- PASS: TestSolve (0.00s)
 PASS
-ok  	github.com/caulagi/x-knight-tour/board	0.128s
+ok  	github.com/caulagi/x-knight-tour/board	(cached)
 ```
 
 #### License
