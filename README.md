@@ -1,5 +1,7 @@
 # x-knight-tour
 
+[![CI](https://github.com/caulagi/x-knight-tour/actions/workflows/ci.yaml/badge.svg)](https://github.com/caulagi/x-knight-tour/actions/workflows/ci.yaml)
+
 A ~mutated~ modified knight tour with the following rules:
 
 * Move 3 squares horizontally or
